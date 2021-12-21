@@ -23,18 +23,18 @@ public class ProductController {
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
     @GetMapping("getOne/{id}")
-    public HttpEntity<?> get(@PathVariable Integer id) {
+    public HttpEntity<?> getProduct(@PathVariable Integer id) {
         ApiResponse apiResponse = productService.getProduct(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
     @GetMapping("getAll")
-    public HttpEntity<?> getBooks(Integer id) {
-        ApiResponse apiResponse = productService.getProducts(id);
+    public HttpEntity<?> getProducts() {
+        ApiResponse apiResponse = productService.getProducts();
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 
     @PutMapping("/edit/{id}")
-    public HttpEntity<?> editBook(@PathVariable Integer id,@RequestBody ProductDto productDto){
+    public HttpEntity<?> editProduct(@PathVariable Integer id,@RequestBody ProductDto productDto){
         ApiResponse apiResponse = productService.edit(id,productDto);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }

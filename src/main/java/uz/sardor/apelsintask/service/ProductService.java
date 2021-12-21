@@ -22,8 +22,9 @@ public class ProductService {
     public ApiResponse add(ProductDto productDto) {
         Product product = new Product();
         product.setName(productDto.getName());
-        if (!categoryRepository.existsById(productDto.getCategoryId())) return new ApiResponse("Not found", false);
-        product.setCategoryId(categoryRepository.getById(productDto.getCategoryId()));
+        Optional<Category> byId = categoryRepository.findById(productDto.getCategoryId());
+        if (!byId.isPresent()) return new ApiResponse("Not found",false);
+        product.setCategoryId(byId.get());
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
         product.setPhoto(productDto.getPhoto());
@@ -37,7 +38,7 @@ public class ProductService {
         return new ApiResponse("Found", true, byId);
     }
 
-    public ApiResponse getProducts(Integer id) {
+    public ApiResponse getProducts() {
         List<Product> all = productRepository.findAll();
         return new ApiResponse("Found", true, all);
     }
