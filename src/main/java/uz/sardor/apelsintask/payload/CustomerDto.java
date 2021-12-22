@@ -1,23 +1,20 @@
-package uz.sardor.apelsintask.entity;
+package uz.sardor.apelsintask.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+public class CustomerDto {
+    @Column(nullable = false,length = 14)
     private String name;
+    @Column(nullable = false,length = 3)
     private String country;
     private String address;
+    @Column(length = 50)
     private String phone;
 }
